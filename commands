@@ -16,4 +16,4 @@ cd django-app/
  pip3 install django-crontab
  pip install django_cron
  */5 * * * * source /home/sana/.bashrc && source ../../env/bin/activate && python /home/ubuntu/work/your-project/src/manage.py runcrons > /home/ubuntu/cronjob.log
-
+source ../env/bin/activate

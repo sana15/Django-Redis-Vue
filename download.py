@@ -12,15 +12,21 @@ import csv
 import requests
 from zipfile import ZipFile 
 from urllib.request import Request, urlopen
-'''
+import datetime
+
 today = date.today()
+now = datetime.datetime.now()
+
 print("Today's date:", type(today))
+print("now ",now.hour)
+
 d1 = today.strftime("%d/%m/%Y")
 print("d1",(d1))
 day = (d1.split("/")[0])
 month = (d1.split("/")[1])
 year = (d1.split("/")[2])[2:]
 print("day",day,month,year)
+print("EQ"+str(day)+str(month)+str(year)+".CSV")
 
 response = requests.get(' https://www.bseindia.com/download/BhavCopy/Equity/EQ160321_CSV.ZIP',timeout=50)
 
@@ -67,3 +73,4 @@ for jsonline in jsonDatatoRedis:
     # conn.flushall()
 # for i in result:
 # print("result",result)
+'''
