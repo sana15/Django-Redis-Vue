@@ -4,6 +4,7 @@ try:
 except ImportError:
     # Fall back to Python 2's urllib2
     from urllib2 import urlopen
+from django.conf import settings
 from datetime import date
 import sys
 import redis
@@ -14,7 +15,7 @@ from zipfile import ZipFile
 from urllib.request import Request, urlopen
 import datetime
 
-def update_something():
+def sync_csvdata_from_BSE():
     
     ''' Extract  bhav copy csv file by requests from BSE'''
     today = date.today()
@@ -29,30 +30,25 @@ def update_something():
     month = (DateMonthYear.split("/")[1])
     year = (DateMonthYear.split("/")[2])[2:]
     print("day",day,month,year)
-    if now.hour > 18:
-    
-    
+    # if now.hour > 18:
+    if now.hour:
         url = 'https://www.bseindia.com/download/BhavCopy/Equity/EQ'+str(day)+str(month)+str(year)+'_CSV.ZIP'
         response = requests.get(url, headers = {"User-Agent": "Mozilla/5.0"}, timeout=50)
         print("response",response)
         if response.status_code == 200:
             print("okay")
-            with open("minemaster1.zip", "wb") as code:
+            with open("Bhavcopy.zip", "wb") as code:
                 code.write(response.content)
-            with ZipFile("minemaster1.zip", 'r') as zip:
+            with ZipFile("Bhavcopy.zip", 'r') as zip:
                 zip.printdir() 
 
             # extracting all the files 
                 print('Extracting all the files now...') 
-                zip.extractall()
+                zip.extractall()      
 
-        
-        
-        
-
-                REDIS_HOST = 'localhost'
-                conn = redis.Redis(REDIS_HOST)
-                conn.flushall()
+                redis_instance = redis.Redis(host=settings.REDIS_HOST,
+                                   port=settings.REDIS_PORT)
+                redis_instance.flushall()
                 jsonDatatoRedis = []
                 with open("EQ"+str(day)+str(month)+str(year)+".CSV","r") as file:
                     csvreader = csv.DictReader(file)
@@ -62,14 +58,7 @@ def update_something():
                         jsonDatatoRedis.append(line)
                     print(len(jsonDatatoRedis))
                 for jsonline in jsonDatatoRedis:
-                #     # print(jsonline['SC_NAME'],jsonline["CLOSE"])
                     name = jsonline['SC_NAME']
-                    # print(name)
-                    # sys.exit(0)
-                    conn.hmset (name,{ "open": (jsonline['OPEN']), "high": (jsonline['HIGH']), "low": (jsonline['LOW']), "close" :(jsonline['CLOSE'])})
-                # result = conn.hscan("HDFC", "open" ,"high", "low", "close")
-                # result = conn.keys("*PDSMFL*")
-
-                    # conn.flushall()
+                    redis_instance.hmset (name,{ "open": (jsonline['OPEN']), "high": (jsonline['HIGH']), "low": (jsonline['LOW']), "close" :(jsonline['CLOSE'])})
         else:
             print("Response is forbidden as today's file is not yet generated")

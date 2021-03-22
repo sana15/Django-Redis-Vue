@@ -17,3 +17,7 @@ cd django-app/
  pip install django_cron
  */5 * * * * source /home/sana/.bashrc && source ../../env/bin/activate && python /home/ubuntu/work/your-project/src/manage.py runcrons > /home/ubuntu/cronjob.log
 source ../env/bin/activate
+sanabye@gmail.com
+ssh root@165.22.214.254
+Sana94402Arshad
+PID=$(systemctl show --value -p MainPID gunicorn.service) && kill -HUP $PID
