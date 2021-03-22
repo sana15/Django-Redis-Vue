@@ -1,0 +1,19 @@
+zerodha app commands
+
+cd django-app/
+ . env/bin/activate
+ https://www.bseindia.com/download/BhavCopy/Equity/EQ160321_CSV.ZIP
+ django-admin startproject django_redis #created 
+ cd django_redis/
+ python3 manage.py runserver
+ django-admin startapp api #api modules are created
+ python manage.py migrate
+ pip install django djangorestframework redis
+ pip install requests
+ hmset pnh  open 121 high 200 low 50 cloase 40
+ hmget pnh open high low cloase
+ conn.keys("*PDSMFL*")
+ pip3 install django-crontab
+ pip install django_cron
+ */5 * * * * source /home/sana/.bashrc && source ../../env/bin/activate && python /home/ubuntu/work/your-project/src/manage.py runcrons > /home/ubuntu/cronjob.log
+
