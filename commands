@@ -21,3 +21,4 @@ sanabye@gmail.com
 ssh root@165.22.214.254
 Sana94402Arshad
 PID=$(systemctl show --value -p MainPID gunicorn.service) && kill -HUP $PID
+python3 manage.py runserver 165.22.214.254:8000
