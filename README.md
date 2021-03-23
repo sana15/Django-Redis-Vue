@@ -4,12 +4,12 @@ Integrated backend APIs with Vue.js
 # Backend
 Django app is located at `/django-app/django_redis`
 ### Installation
-  `pip3 install python3`
-  `pip3 install Django==3.1.7`
-  `sudo apt install redis-server`
-  `pip3 APScheduler==3.7.0`
-  `pip3 django-cors-headers==3.7.0`
-  `pip install -r requirements.txt`
+  ```pip3 install python3```
+ ```pip3 install Django==3.1.7```
+  ```sudo apt install redis-server```
+  ```pip3 APScheduler==3.7.0```
+  ```pip3 django-cors-headers==3.7.0```
+  ```pip install -r requirements.txt```
 
 ### Running the local server
 
@@ -47,4 +47,3 @@ Vue app is located at `/frontend`
 ### Running the local server
     `npm run serve`
 
-    

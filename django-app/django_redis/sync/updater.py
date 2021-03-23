@@ -7,7 +7,7 @@ def start():
     print("starting updater")
     scheduler = BackgroundScheduler({'apscheduler.timezone': 'Asia/Calcutta'})
    
-    scheduler.add_job(sync_csvdata_from_BSE, trigger='cron', day_of_week='mon-fri', hour='18', minute='30')
+    scheduler.add_job(sync_csvdata_from_BSE, trigger='cron', day_of_week='mon-fri', hour='18', minute='10')
     
     scheduler.start()
     
