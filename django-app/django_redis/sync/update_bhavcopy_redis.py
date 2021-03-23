@@ -30,8 +30,7 @@ def sync_csvdata_from_BSE():
     month = (DateMonthYear.split("/")[1])
     year = (DateMonthYear.split("/")[2])[2:]
     print("day",day,month,year)
-    # if now.hour > 18:
-    if now.hour:
+    if now.hour > 18:
         url = 'https://www.bseindia.com/download/BhavCopy/Equity/EQ'+str(day)+str(month)+str(year)+'_CSV.ZIP'
         response = requests.get(url, headers = {"User-Agent": "Mozilla/5.0"}, timeout=50)
         print("response",response)
